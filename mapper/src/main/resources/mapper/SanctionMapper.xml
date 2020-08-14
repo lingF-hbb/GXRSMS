@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whx.gxrsms.mapper.SanctionMapper">
+    <resultMap id="BaseResultMap" type="com.whx.gxrsms.model.Sanction">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="emp_no" property="empNo" jdbcType="BIGINT"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="queryAllSanction" resultType="com.whx.gxrsms.dto.SanctionDTO">
+select a.*,e.name,d.dept_name
+from sanction a
+         inner join employee e on e.emp_no = a.emp_no
+         inner join dept d on d.dept_no = e.dept_no
+         <if test="msg!=null and msg!=''">
+           where a.emp_no = concat('%',#{message},'%'))
+           or e.name like concat('%',#{message},'%'))
+           or d.dept_name like concat('%',#{message},'%'))
+         </if>
+    </select>
+</mapper>

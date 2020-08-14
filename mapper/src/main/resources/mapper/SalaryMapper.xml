@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whx.gxrsms.mapper.SalaryMapper">
+  <resultMap id="BaseResultMap" type="com.whx.gxrsms.model.Salary">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_no" jdbcType="VARCHAR" property="empNo" />
+    <result column="jiben" jdbcType="DECIMAL" property="jiben" />
+    <result column="jintie" jdbcType="DECIMAL" property="jintie" />
+    <result column="keshi" jdbcType="DECIMAL" property="keshi" />
+    <result column="shebao" jdbcType="DECIMAL" property="shebao" />
+    <result column="salary" jdbcType="DECIMAL" property="salary" />
+    <result column="extend_time" jdbcType="VARCHAR" property="extendTime" />
+    <result column="finished" jdbcType="VARCHAR" property="finished" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+    <select id="queryAll" resultType="com.whx.gxrsms.dto.EmpSalaryDTO">
+      select s.*,e.name from salary s inner join employee e on e.emp_no = s.emp_no where 1=1
+      <if test="msg!=null and msg!=''">
+        and e.emp_no like concat('%',#{msg},'%') or e.name like concat('%',#{msg},'%')
+      </if>
+    </select>
+</mapper>

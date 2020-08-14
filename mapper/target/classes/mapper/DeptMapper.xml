@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whx.gxrsms.mapper.DeptMapper" >
+  <resultMap id="BaseResultMap" type="com.whx.gxrsms.model.Dept" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dept_no" property="deptNo" jdbcType="VARCHAR" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="queryDepInfo" resultType="com.whx.gxrsms.model.Dept">
+    SELECT *
+    FROM dept
+    WHERE 1=1
+    <if test="message != null and message!=''">
+      AND (dept_no like concat('%',#{message},'%')
+      OR dept_name  like concat('%',#{message},'%'))
+    </if>
+  </select>
+
+</mapper>

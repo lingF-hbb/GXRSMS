@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--引入需要的配置文件-->
+    <properties resource="mybatis-generator.properties"/>
+
+    <context id="mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 带上序列化接口 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+        <!--整合lombok-->
+        <plugin type="com.zs.plugins.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
+        <!--覆盖-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--定义数据库连接-->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 实体生成目录配置 -->
+        <javaModelGenerator targetPackage="${model.location}" targetProject="${model.project}/src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- mapper.xml接口生成目录配置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="${mapper.project}/src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- mapper接口生成目录配置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${mapper.location}" targetProject="${mapper.project}/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!--表格实体配置-->
+
+<!--        <table tableName="user">-->
+<!--            <generatedKey column="id" sqlStatement="JDBC" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="files">-->
+<!--            <generatedKey column="id" sqlStatement="JDBC" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="dept">-->
+<!--            <generatedKey column="id" sqlStatement="JDBC" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="employee">-->
+<!--            <generatedKey column="id" sqlStatement="JDBC" identity="true" />-->
+<!--        </table>-->
+        <table tableName="salary">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>
+<!--                <table tableName="sanction">-->
+<!--                    <generatedKey column="id" sqlStatement="JDBC" identity="true" />-->
+<!--                </table>-->
+
+    </context>
+</generatorConfiguration>
