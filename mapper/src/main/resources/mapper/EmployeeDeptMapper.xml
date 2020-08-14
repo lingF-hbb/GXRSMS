@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whx.gxrsms.mapper.EmployeeMapper">
+    <resultMap id="ResultMap" type="com.whx.gxrsms.dto.EmpDepSearchDTO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="emp_no" property="empNo" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="gender" property="gender" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="dept_no" property="deptNo" jdbcType="VARCHAR" />
+        <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+        <result column="work_status" property="workStatus" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <select id="queryAll" resultMap="ResultMap">
+SELECT e.*,d.dept_name FROM employee e
+        LEFT JOIN dept d
+        ON e.dept_no = d.dept_no
+  </select>
+  <select id="queryEmpInfo" resultMap="ResultMap">
+    SELECT e.*,d.dept_name
+    FROM employee e
+    INNER JOIN dept d
+    ON e.dept_no = d.dept_no
+    <if test="name!=null and name!=''">
+      <bind name="pattern" value=" '%' + name + '%'"></bind>
+      AND e.name LIKE #{pattern}
+    </if>
+  </select>
+</mapper>
