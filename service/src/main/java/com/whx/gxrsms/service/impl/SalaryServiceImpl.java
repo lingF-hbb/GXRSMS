@@ -31,4 +31,9 @@ public class SalaryServiceImpl extends AbstractService<Salary> implements Salary
     public List<EmpSalaryDTO> queryAllSalary(String msg) {
         return  salaryMapper.queryAll(msg);
     }
+
+    @Override
+    public List<EmpSalaryDTO> queryAllSalsary(String msg) {
+        return null;
+    }
 }

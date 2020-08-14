@@ -19,4 +19,5 @@ public interface SalaryService extends BaseService<Salary> {
      * @return 所有工资数据
      */
     List<EmpSalaryDTO> queryAllSalary(String msg);
+    List<EmpSalaryDTO> queryAllSalsary(String msg);
 }
